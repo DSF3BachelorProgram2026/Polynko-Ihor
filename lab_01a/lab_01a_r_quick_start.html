@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ihor Polynko, KN-23-1">
+
+<title>Лабораторна робота № 1a. Спеціалізована мова програмування R для статистичної обробки даних. Швидкий старт.</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="lab_01a_r_quick_start_files/libs/clipboard/clipboard.min.js"></script>
+<script src="lab_01a_r_quick_start_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="lab_01a_r_quick_start_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="lab_01a_r_quick_start_files/libs/quarto-html/popper.min.js"></script>
+<script src="lab_01a_r_quick_start_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="lab_01a_r_quick_start_files/libs/quarto-html/anchor.min.js"></script>
+<link href="lab_01a_r_quick_start_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="lab_01a_r_quick_start_files/libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="lab_01a_r_quick_start_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="lab_01a_r_quick_start_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="lab_01a_r_quick_start_files/libs/bootstrap/bootstrap-215b371544c282197b31c8aa00ce3677.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Зміст</h2>
+   
+  <ul>
+  <li><a href="#короткі-теоретичні-відомості" id="toc-короткі-теоретичні-відомості" class="nav-link active" data-scroll-target="#короткі-теоретичні-відомості">Короткі теоретичні відомості</a>
+  <ul class="collapse">
+  <li><a href="#r-як-спеціалізована-мова-статистичної-обробки-даних" id="toc-r-як-спеціалізована-мова-статистичної-обробки-даних" class="nav-link" data-scroll-target="#r-як-спеціалізована-мова-статистичної-обробки-даних">R як спеціалізована мова статистичної обробки даних</a></li>
+  <li><a href="#обєкти-в-r" id="toc-обєкти-в-r" class="nav-link" data-scroll-target="#обєкти-в-r">Об’єкти в R</a></li>
+  <li><a href="#вектори" id="toc-вектори" class="nav-link" data-scroll-target="#вектори">Вектори</a></li>
+  <li><a href="#таблиці-даних" id="toc-таблиці-даних" class="nav-link" data-scroll-target="#таблиці-даних">Таблиці даних</a></li>
+  <li><a href="#описові-статистики" id="toc-описові-статистики" class="nav-link" data-scroll-target="#описові-статистики">Описові статистики</a>
+  <ul class="collapse">
+  <li><a href="#середнє-значення" id="toc-середнє-значення" class="nav-link" data-scroll-target="#середнє-значення">Середнє значення</a></li>
+  <li><a href="#медіана" id="toc-медіана" class="nav-link" data-scroll-target="#медіана">Медіана</a></li>
+  <li><a href="#мінімальне-та-максимальне-значення" id="toc-мінімальне-та-максимальне-значення" class="nav-link" data-scroll-target="#мінімальне-та-максимальне-значення">Мінімальне та максимальне значення</a></li>
+  <li><a href="#дисперсія" id="toc-дисперсія" class="nav-link" data-scroll-target="#дисперсія">Дисперсія</a></li>
+  <li><a href="#стандартне-відхилення" id="toc-стандартне-відхилення" class="nav-link" data-scroll-target="#стандартне-відхилення">Стандартне відхилення</a></li>
+  <li><a href="#узагальнена-статистика" id="toc-узагальнена-статистика" class="nav-link" data-scroll-target="#узагальнена-статистика">Узагальнена статистика</a></li>
+  </ul></li>
+  <li><a href="#візуалізація-даних" id="toc-візуалізація-даних" class="nav-link" data-scroll-target="#візуалізація-даних">Візуалізація даних</a>
+  <ul class="collapse">
+  <li><a href="#точковий-графік" id="toc-точковий-графік" class="nav-link" data-scroll-target="#точковий-графік">Точковий графік</a></li>
+  <li><a href="#гістограма" id="toc-гістограма" class="nav-link" data-scroll-target="#гістограма">Гістограма</a></li>
+  <li><a href="#діаграма-розмаху" id="toc-діаграма-розмаху" class="nav-link" data-scroll-target="#діаграма-розмаху">Діаграма розмаху</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#пакети-в-r" id="toc-пакети-в-r" class="nav-link" data-scroll-target="#пакети-в-r">Пакети в R</a>
+  <ul class="collapse">
+  <li><a href="#побудова-графіка-за-допомогою-ggplot2" id="toc-побудова-графіка-за-допомогою-ggplot2" class="nav-link" data-scroll-target="#побудова-графіка-за-допомогою-ggplot2">Побудова графіка за допомогою ggplot2</a></li>
+  </ul></li>
+  <li><a href="#приклад-первинного-статистичного-аналізу" id="toc-приклад-первинного-статистичного-аналізу" class="nav-link" data-scroll-target="#приклад-первинного-статистичного-аналізу">Приклад первинного статистичного аналізу</a>
+  <ul class="collapse">
+  <li><a href="#перегляд-структури-даних" id="toc-перегляд-структури-даних" class="nav-link" data-scroll-target="#перегляд-структури-даних">Перегляд структури даних</a></li>
+  <li><a href="#обчислення-описових-характеристик" id="toc-обчислення-описових-характеристик" class="nav-link" data-scroll-target="#обчислення-описових-характеристик">Обчислення описових характеристик</a></li>
+  <li><a href="#графічний-аналіз-навчальної-вибірки" id="toc-графічний-аналіз-навчальної-вибірки" class="nav-link" data-scroll-target="#графічний-аналіз-навчальної-вибірки">Графічний аналіз навчальної вибірки</a>
+  <ul class="collapse">
+  <li><a href="#гістограма-1" id="toc-гістограма-1" class="nav-link" data-scroll-target="#гістограма-1">Гістограма</a></li>
+  <li><a href="#діаграма-розмаху-1" id="toc-діаграма-розмаху-1" class="nav-link" data-scroll-target="#діаграма-розмаху-1">Діаграма розмаху</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#індивідуальне-завдання" id="toc-індивідуальне-завдання" class="nav-link" data-scroll-target="#індивідуальне-завдання">Індивідуальне завдання</a>
+  <ul class="collapse">
+  <li><a href="#варіант-3-час-завантаження-вебсторінки" id="toc-варіант-3-час-завантаження-вебсторінки" class="nav-link" data-scroll-target="#варіант-3-час-завантаження-вебсторінки">Варіант 3 – час завантаження вебсторінки</a></li>
+  <li><a href="#створення-набору-даних" id="toc-створення-набору-даних" class="nav-link" data-scroll-target="#створення-набору-даних">Створення набору даних</a></li>
+  <li><a href="#описові-статистики-1" id="toc-описові-статистики-1" class="nav-link" data-scroll-target="#описові-статистики-1">Описові статистики</a></li>
+  <li><a href="#інтерпретація-статистичних-характеристик" id="toc-інтерпретація-статистичних-характеристик" class="nav-link" data-scroll-target="#інтерпретація-статистичних-характеристик">Інтерпретація статистичних характеристик</a></li>
+  <li><a href="#гістограма-2" id="toc-гістограма-2" class="nav-link" data-scroll-target="#гістограма-2">Гістограма</a></li>
+  <li><a href="#точковий-графік-1" id="toc-точковий-графік-1" class="nav-link" data-scroll-target="#точковий-графік-1">Точковий графік</a></li>
+  <li><a href="#діаграма-розмаху-2" id="toc-діаграма-розмаху-2" class="nav-link" data-scroll-target="#діаграма-розмаху-2">Діаграма розмаху</a></li>
+  </ul></li>
+  <li><a href="#контрольні-питання" id="toc-контрольні-питання" class="nav-link" data-scroll-target="#контрольні-питання">Контрольні питання</a>
+  <ul class="collapse">
+  <li><a href="#що-таке-мова-r-і-чому-вона-зручна-для-статистичної-обробки-інформації" id="toc-що-таке-мова-r-і-чому-вона-зручна-для-статистичної-обробки-інформації" class="nav-link" data-scroll-target="#що-таке-мова-r-і-чому-вона-зручна-для-статистичної-обробки-інформації">1. Що таке мова R і чому вона зручна для статистичної обробки інформації?</a></li>
+  <li><a href="#що-таке-обєкт-в-r" id="toc-що-таке-обєкт-в-r" class="nav-link" data-scroll-target="#що-таке-обєкт-в-r">2. Що таке об’єкт в R?</a></li>
+  <li><a href="#яке-призначення-має-оператор-присвоювання--" id="toc-яке-призначення-має-оператор-присвоювання--" class="nav-link" data-scroll-target="#яке-призначення-має-оператор-присвоювання--">3. Яке призначення має оператор присвоювання <code>&lt;-</code>?</a></li>
+  <li><a href="#що-таке-вектор-і-чому-він-є-базовою-структурою-даних-у-статистичних-задачах" id="toc-що-таке-вектор-і-чому-він-є-базовою-структурою-даних-у-статистичних-задачах" class="nav-link" data-scroll-target="#що-таке-вектор-і-чому-він-є-базовою-структурою-даних-у-статистичних-задачах">4. Що таке вектор і чому він є базовою структурою даних у статистичних задачах?</a></li>
+  <li><a href="#чим-таблиця-даних-data.frame-відрізняється-від-простого-вектора" id="toc-чим-таблиця-даних-data.frame-відрізняється-від-простого-вектора" class="nav-link" data-scroll-target="#чим-таблиця-даних-data.frame-відрізняється-від-простого-вектора">5. Чим таблиця даних <code>data.frame</code> відрізняється від простого вектора?</a></li>
+  <li><a href="#які-описові-статистики-характеризують-центр-вибірки" id="toc-які-описові-статистики-характеризують-центр-вибірки" class="nav-link" data-scroll-target="#які-описові-статистики-характеризують-центр-вибірки">6. Які описові статистики характеризують центр вибірки?</a></li>
+  <li><a href="#які-описові-статистики-характеризують-розсіювання-значень" id="toc-які-описові-статистики-характеризують-розсіювання-значень" class="nav-link" data-scroll-target="#які-описові-статистики-характеризують-розсіювання-значень">7. Які описові статистики характеризують розсіювання значень?</a></li>
+  <li><a href="#для-чого-використовується-гістограма" id="toc-для-чого-використовується-гістограма" class="nav-link" data-scroll-target="#для-чого-використовується-гістограма">8. Для чого використовується гістограма?</a></li>
+  <li><a href="#що-показує-діаграма-розмаху" id="toc-що-показує-діаграма-розмаху" class="nav-link" data-scroll-target="#що-показує-діаграма-розмаху">9. Що показує діаграма розмаху?</a></li>
+  <li><a href="#яку-роль-відіграє-quarto-у-підготовці-відтворюваного-статистичного-звіту" id="toc-яку-роль-відіграє-quarto-у-підготовці-відтворюваного-статистичного-звіту" class="nav-link" data-scroll-target="#яку-роль-відіграє-quarto-у-підготовці-відтворюваного-статистичного-звіту">10. Яку роль відіграє Quarto у підготовці відтворюваного статистичного звіту?</a></li>
+  </ul></li>
+  <li><a href="#висновки" id="toc-висновки" class="nav-link" data-scroll-target="#висновки">Висновки</a></li>
+  <li><a href="#рекомендовані-джерела" id="toc-рекомендовані-джерела" class="nav-link" data-scroll-target="#рекомендовані-джерела">Рекомендовані джерела</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><strong><em>Лабораторна робота № 1a.</em></strong> <strong>Спеціалізована мова програмування R для статистичної обробки даних. Швидкий старт.</strong></h1>
+<p class="subtitle lead">Спеціалізована мова програмування R для статистичної обробки даних. Швидкий старт</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ihor Polynko, KN-23-1 </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Мета роботи:</strong> <em>Сформувати початкові практичні навички роботи з мовою програмування <strong>R</strong> як спеціалізованим інструментом статистичної обробки інформації, навчитися виконувати базові обчислення, створювати вектори й таблиці даних, обчислювати описові статистики та будувати найпростіші графіки.</em></p>
+<section id="короткі-теоретичні-відомості" class="level1">
+<h1>Короткі теоретичні відомості</h1>
+<section id="r-як-спеціалізована-мова-статистичної-обробки-даних" class="level2">
+<h2 class="anchored" data-anchor-id="r-як-спеціалізована-мова-статистичної-обробки-даних">R як спеціалізована мова статистичної обробки даних</h2>
+<p><strong>R</strong> – це спеціалізована мова програмування та програмне середовище, орієнтоване на статистичні обчислення, аналіз даних, моделювання та візуалізацію результатів.</p>
+<p>У статистичному дослідженні R можна використовувати для таких основних етапів:</p>
+<ol type="1">
+<li>отримання або імпорту даних;</li>
+<li>попереднього перегляду та очищення даних;</li>
+<li>обчислення описових статистик;</li>
+<li>побудови графіків;</li>
+<li>статистичного моделювання;</li>
+<li>інтерпретації результатів;</li>
+<li>підготовки відтворюваного звіту.</li>
+</ol>
+</section>
+<section id="обєкти-в-r" class="level2">
+<h2 class="anchored" data-anchor-id="обєкти-в-r">Об’єкти в R</h2>
+<p>Основним принципом роботи в R є створення та обробка об’єктів. Об’єктом може бути число, вектор, таблиця даних, модель, графік або результат статистичного тесту.</p>
+<p>Для присвоювання значення об’єкту використовується оператор <code>&lt;-</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+<p>У результаті створюється числовий об’єкт <code>x</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">15</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+<p>Отримуємо суму двох числових об’єктів.</p>
+</section>
+<section id="вектори" class="level2">
+<h2 class="anchored" data-anchor-id="вектори">Вектори</h2>
+<p>Вектор є однією з базових структур даних у R. Для створення вектора використовується функція <code>c()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>response_time <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">120</span>, <span class="dv">135</span>, <span class="dv">128</span>, <span class="dv">142</span>, <span class="dv">150</span>, <span class="dv">138</span>, <span class="dv">131</span>, <span class="dv">145</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>response_time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 120 135 128 142 150 138 131 145</code></pre>
+</div>
+</div>
+<p>У статистичних задачах вектор можна розглядати як вибірку значень певної випадкової величини.</p>
+</section>
+<section id="таблиці-даних" class="level2">
+<h2 class="anchored" data-anchor-id="таблиці-даних">Таблиці даних</h2>
+<p>Для роботи з декількома змінними зручно використовувати структуру <code>data.frame</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>server_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">request_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">response_time =</span> <span class="fu">c</span>(<span class="dv">120</span>, <span class="dv">135</span>, <span class="dv">128</span>, <span class="dv">142</span>, <span class="dv">150</span>, <span class="dv">138</span>, <span class="dv">131</span>, <span class="dv">145</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">load_level =</span> <span class="fu">c</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"low"</span>, <span class="st">"low"</span>, <span class="st">"low"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"medium"</span>, <span class="st">"medium"</span>, <span class="st">"medium"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"high"</span>, <span class="st">"high"</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>server_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  request_id response_time load_level
+1          1           120        low
+2          2           135        low
+3          3           128        low
+4          4           142     medium
+5          5           150     medium
+6          6           138     medium
+7          7           131       high
+8          8           145       high</code></pre>
+</div>
+</div>
+<p>Кожен рядок таблиці відповідає окремому спостереженню, а кожен стовпець – окремій змінній.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(server_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   8 obs. of  3 variables:
+ $ request_id   : int  1 2 3 4 5 6 7 8
+ $ response_time: num  120 135 128 142 150 138 131 145
+ $ load_level   : chr  "low" "low" "low" "medium" ...</code></pre>
+</div>
+</div>
+</section>
+<section id="описові-статистики" class="level2">
+<h2 class="anchored" data-anchor-id="описові-статистики">Описові статистики</h2>
+<p>Для первинного статистичного аналізу використовуються описові характеристики вибірки.</p>
+<p>До основних описових статистик належать:</p>
+<ul>
+<li>середнє арифметичне;</li>
+<li>медіана;</li>
+<li>мінімальне значення;</li>
+<li>максимальне значення;</li>
+<li>дисперсія;</li>
+<li>стандартне відхилення;</li>
+<li>квартилі.</li>
+</ul>
+<section id="середнє-значення" class="level3">
+<h3 class="anchored" data-anchor-id="середнє-значення">Середнє значення</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 136.125</code></pre>
+</div>
+</div>
+</section>
+<section id="медіана" class="level3">
+<h3 class="anchored" data-anchor-id="медіана">Медіана</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 136.5</code></pre>
+</div>
+</div>
+</section>
+<section id="мінімальне-та-максимальне-значення" class="level3">
+<h3 class="anchored" data-anchor-id="мінімальне-та-максимальне-значення">Мінімальне та максимальне значення</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 120</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 150</code></pre>
+</div>
+</div>
+</section>
+<section id="дисперсія" class="level3">
+<h3 class="anchored" data-anchor-id="дисперсія">Дисперсія</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 94.69643</code></pre>
+</div>
+</div>
+</section>
+<section id="стандартне-відхилення" class="level3">
+<h3 class="anchored" data-anchor-id="стандартне-відхилення">Стандартне відхилення</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9.731209</code></pre>
+</div>
+</div>
+</section>
+<section id="узагальнена-статистика" class="level3">
+<h3 class="anchored" data-anchor-id="узагальнена-статистика">Узагальнена статистика</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  120.0   130.2   136.5   136.1   142.8   150.0 </code></pre>
+</div>
+</div>
+<p>Функція <code>summary()</code> дозволяє швидко отримати мінімальне значення, перший квартиль, медіану, середнє, третій квартиль та максимальне значення.</p>
+</section>
+</section>
+<section id="візуалізація-даних" class="level2">
+<h2 class="anchored" data-anchor-id="візуалізація-даних">Візуалізація даних</h2>
+<p>Графічний аналіз дозволяє наочно оцінити характер розподілу та зміну даних.</p>
+<section id="точковий-графік" class="level3">
+<h3 class="anchored" data-anchor-id="точковий-графік">Точковий графік</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  server_data<span class="sc">$</span>request_id,</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  server_data<span class="sc">$</span>response_time,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Час відповіді сервера"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Номер запиту"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Час відповіді, мс"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="гістограма" class="level3">
+<h3 class="anchored" data-anchor-id="гістограма">Гістограма</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  response_time,</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Гістограма часу відповіді сервера"</span>,</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Час відповіді, мс"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Частота"</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Гістограма показує, як спостереження розподіляються за інтервалами значень.</p>
+</section>
+<section id="діаграма-розмаху" class="level3">
+<h3 class="anchored" data-anchor-id="діаграма-розмаху">Діаграма розмаху</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  response_time,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Діаграма розмаху часу відповіді сервера"</span>,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Час відповіді, мс"</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Діаграма розмаху дозволяє оцінити медіану, квартилі, міжквартильний розмах та можливі аномальні значення.</p>
+</section>
+</section>
+</section>
+<section id="пакети-в-r" class="level1">
+<h1>Пакети в R</h1>
+<p>Можливості базового R можна розширювати за допомогою пакетів.</p>
+<p>У цій лабораторній роботі використаємо пакети <code>dplyr</code> для обробки таблиць та <code>ggplot2</code> для побудови графіків.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dplyr"</span>, <span class="st">"ggplot2"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>installed <span class="ot">&lt;-</span> <span class="fu">rownames</span>(<span class="fu">installed.packages</span>())</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>needed <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(packages, installed)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(needed) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(needed)</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="побудова-графіка-за-допомогою-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="побудова-графіка-за-допомогою-ggplot2">Побудова графіка за допомогою ggplot2</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(server_data, <span class="fu">aes</span>(<span class="at">x =</span> request_id, <span class="at">y =</span> response_time)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Час відповіді сервера за номером запиту"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Номер запиту"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Час відповіді, мс"</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="приклад-первинного-статистичного-аналізу" class="level1">
+<h1>Приклад первинного статистичного аналізу</h1>
+<p>Розглянемо навчальну вибірку, що описує час відповіді сервера на запити користувачів.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>response_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">request_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">response_time =</span> <span class="fu">round</span>(</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">140</span>, <span class="at">sd =</span> <span class="dv">12</span>),</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(response_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  request_id response_time
+1          1         133.3
+2          2         137.2
+3          3         158.7
+4          4         140.8
+5          5         141.6
+6          6         160.6</code></pre>
+</div>
+</div>
+<p>Перші шість спостережень можна переглянути за допомогою функції <code>head()</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(response_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   request_id response_time
+25         25         132.5
+26         26         119.8
+27         27         150.1
+28         28         141.8
+29         29         126.3
+30         30         155.0</code></pre>
+</div>
+</div>
+<p>Функція <code>tail()</code> показує останні спостереження таблиці.</p>
+<section id="перегляд-структури-даних" class="level2">
+<h2 class="anchored" data-anchor-id="перегляд-структури-даних">Перегляд структури даних</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(response_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   30 obs. of  2 variables:
+ $ request_id   : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ response_time: num  133 137 159 141 142 ...</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(response_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<p>Отриманий об’єкт має клас <code>data.frame</code>, тобто є таблицею даних.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(response_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   request_id    response_time  
+ Min.   : 1.00   Min.   :116.4  
+ 1st Qu.: 8.25   1st Qu.:132.0  
+ Median :15.50   Median :139.1  
+ Mean   :15.50   Mean   :139.4  
+ 3rd Qu.:22.75   3rd Qu.:145.9  
+ Max.   :30.00   Max.   :161.4  </code></pre>
+</div>
+</div>
+<p>За допомогою <code>summary()</code> можна отримати узагальнені статистичні характеристики змінних таблиці.</p>
+</section>
+<section id="обчислення-описових-характеристик" class="level2">
+<h2 class="anchored" data-anchor-id="обчислення-описових-характеристик">Обчислення описових характеристик</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>response_summary <span class="ot">&lt;-</span> response_data <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_time =</span> <span class="fu">mean</span>(response_time),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_time =</span> <span class="fu">median</span>(response_time),</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_time =</span> <span class="fu">min</span>(response_time),</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_time =</span> <span class="fu">max</span>(response_time),</span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">variance_time =</span> <span class="fu">var</span>(response_time),</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_time =</span> <span class="fu">sd</span>(response_time)</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a>response_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   n mean_time median_time min_time max_time variance_time  sd_time
+1 30  139.4333       139.1    116.4    161.4      138.4464 11.76633</code></pre>
+</div>
+</div>
+<p>Отримані характеристики дають змогу оцінити центральне значення вибірки та рівень розсіювання спостережень.</p>
+</section>
+<section id="графічний-аналіз-навчальної-вибірки" class="level2">
+<h2 class="anchored" data-anchor-id="графічний-аналіз-навчальної-вибірки">Графічний аналіз навчальної вибірки</h2>
+<section id="гістограма-1" class="level3">
+<h3 class="anchored" data-anchor-id="гістограма-1">Гістограма</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(response_data, <span class="fu">aes</span>(<span class="at">x =</span> response_time)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Гістограма навчальної вибірки"</span>,</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Час відповіді, мс"</span>,</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Кількість спостережень"</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Гістограма дозволяє оцінити розподіл часу відповіді за інтервалами значень.</p>
+</section>
+<section id="діаграма-розмаху-1" class="level3">
+<h3 class="anchored" data-anchor-id="діаграма-розмаху-1">Діаграма розмаху</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(response_data, <span class="fu">aes</span>(<span class="at">y =</span> response_time)) <span class="sc">+</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Діаграма розмаху навчальної вибірки"</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Час відповіді, мс"</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Діаграма розмаху дає змогу оцінити медіану, квартилі та можливі значення, які відрізняються від основної частини вибірки.</p>
+</section>
+</section>
+</section>
+<section id="індивідуальне-завдання" class="level1">
+<h1>Індивідуальне завдання</h1>
+<section id="варіант-3-час-завантаження-вебсторінки" class="level2">
+<h2 class="anchored" data-anchor-id="варіант-3-час-завантаження-вебсторінки">Варіант 3 – час завантаження вебсторінки</h2>
+<p>Відповідно до номера у списку групи <strong>15</strong> та циклічного вибору варіантів:</p>
+<p><span class="math display">
+15 \bmod 12 = 3.
+</span></p>
+<p>Отже, індивідуальний варіант – <strong>№3: час завантаження вебсторінки, с.</strong></p>
+<p>Для аналізу сформовано вибірку з 30 спостережень. Значення характеризують час завантаження вебсторінки в секундах.</p>
+</section>
+<section id="створення-набору-даних" class="level2">
+<h2 class="anchored" data-anchor-id="створення-набору-даних">Створення набору даних</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>page_load_time <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.42</span>, <span class="fl">1.67</span>, <span class="fl">1.31</span>, <span class="fl">2.05</span>, <span class="fl">1.78</span>,</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.55</span>, <span class="fl">1.23</span>, <span class="fl">1.91</span>, <span class="fl">1.64</span>, <span class="fl">1.48</span>,</span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.21</span>, <span class="fl">1.73</span>, <span class="fl">1.36</span>, <span class="fl">1.59</span>, <span class="fl">1.84</span>,</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.27</span>, <span class="fl">1.69</span>, <span class="fl">2.34</span>, <span class="fl">1.52</span>, <span class="fl">1.45</span>,</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.88</span>, <span class="fl">1.61</span>, <span class="fl">1.74</span>, <span class="fl">1.33</span>, <span class="fl">2.08</span>,</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.57</span>, <span class="fl">1.49</span>, <span class="fl">1.95</span>, <span class="fl">1.71</span>, <span class="fl">1.39</span></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a>page_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">observation =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(page_load_time),</span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">load_time =</span> page_load_time</span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>page_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   observation load_time
+1            1      1.42
+2            2      1.67
+3            3      1.31
+4            4      2.05
+5            5      1.78
+6            6      1.55
+7            7      1.23
+8            8      1.91
+9            9      1.64
+10          10      1.48
+11          11      2.21
+12          12      1.73
+13          13      1.36
+14          14      1.59
+15          15      1.84
+16          16      1.27
+17          17      1.69
+18          18      2.34
+19          19      1.52
+20          20      1.45
+21          21      1.88
+22          22      1.61
+23          23      1.74
+24          24      1.33
+25          25      2.08
+26          26      1.57
+27          27      1.49
+28          28      1.95
+29          29      1.71
+30          30      1.39</code></pre>
+</div>
+</div>
+<p>У таблиці кожен рядок відповідає окремому спостереженню, а стовпець <code>load_time</code> містить час завантаження вебсторінки в секундах.</p>
+</section>
+<section id="описові-статистики-1" class="level2">
+<h2 class="anchored" data-anchor-id="описові-статистики-1">Описові статистики</h2>
+<p>Обчислимо кількість спостережень, середнє значення, медіану, мінімум, максимум, дисперсію та стандартне відхилення.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>page_summary <span class="ot">&lt;-</span> page_data <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_time =</span> <span class="fu">mean</span>(load_time),</span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_time =</span> <span class="fu">median</span>(load_time),</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_time =</span> <span class="fu">min</span>(load_time),</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_time =</span> <span class="fu">max</span>(load_time),</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">variance_time =</span> <span class="fu">var</span>(load_time),</span>
+<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_time =</span> <span class="fu">sd</span>(load_time)</span>
+<span id="cb46-10"><a href="#cb46-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-11"><a href="#cb46-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-12"><a href="#cb46-12" aria-hidden="true" tabindex="-1"></a>page_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   n mean_time median_time min_time max_time variance_time   sd_time
+1 30  1.659667       1.625     1.23     2.34    0.07903092 0.2811244</code></pre>
+</div>
+</div>
+<p>Для зручнішого представлення результатів використаємо таблицю з округленням до трьох знаків після коми.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>page_summary <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_time =</span> <span class="fu">round</span>(mean_time, <span class="dv">3</span>),</span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_time =</span> <span class="fu">round</span>(median_time, <span class="dv">3</span>),</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_time =</span> <span class="fu">round</span>(min_time, <span class="dv">3</span>),</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_time =</span> <span class="fu">round</span>(max_time, <span class="dv">3</span>),</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">variance_time =</span> <span class="fu">round</span>(variance_time, <span class="dv">3</span>),</span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_time =</span> <span class="fu">round</span>(sd_time, <span class="dv">3</span>)</span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   n mean_time median_time min_time max_time variance_time sd_time
+1 30      1.66       1.625     1.23     2.34         0.079   0.281</code></pre>
+</div>
+</div>
+</section>
+<section id="інтерпретація-статистичних-характеристик" class="level2">
+<h2 class="anchored" data-anchor-id="інтерпретація-статистичних-характеристик">Інтерпретація статистичних характеристик</h2>
+<p>Кількість спостережень у вибірці становить 30.</p>
+<p>Середнє значення характеризує типовий час завантаження вебсторінки для досліджуваної вибірки. Медіана показує значення, відносно якого половина спостережень має менший або рівний час завантаження, а інша половина – більший або рівний.</p>
+<p>Мінімальне та максимальне значення визначають діапазон зміни часу завантаження вебсторінки.</p>
+<p>Дисперсія та стандартне відхилення характеризують розсіювання значень навколо середнього. Чим більшим є стандартне відхилення, тим сильніше окремі значення відрізняються від середнього часу завантаження.</p>
+<p>Для досліджуваної вибірки значення часу завантаження знаходяться приблизно в діапазоні від 1,23 до 2,34 секунди. Більшість значень зосереджена поблизу середнього рівня, однак у вибірці присутні окремі повільніші завантаження.</p>
+</section>
+<section id="гістограма-2" class="level2">
+<h2 class="anchored" data-anchor-id="гістограма-2">Гістограма</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(page_data, <span class="fu">aes</span>(<span class="at">x =</span> load_time)) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Гістограма часу завантаження вебсторінки"</span>,</span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Час завантаження, с"</span>,</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Кількість спостережень"</span></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Гістограма показує частоту потрапляння спостережень до окремих інтервалів часу. За її допомогою можна оцінити, у якому діапазоні найчастіше знаходиться час завантаження вебсторінки.</p>
+</section>
+<section id="точковий-графік-1" class="level2">
+<h2 class="anchored" data-anchor-id="точковий-графік-1">Точковий графік</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(page_data, <span class="fu">aes</span>(<span class="at">x =</span> observation, <span class="at">y =</span> load_time)) <span class="sc">+</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Час завантаження вебсторінки за номером спостереження"</span>,</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Номер спостереження"</span>,</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Час завантаження, с"</span></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Точковий графік показує зміну часу завантаження для кожного окремого спостереження. Він дає змогу побачити коливання показника та окремі значення, які помітно відрізняються від сусідніх спостережень.</p>
+</section>
+<section id="діаграма-розмаху-2" class="level2">
+<h2 class="anchored" data-anchor-id="діаграма-розмаху-2">Діаграма розмаху</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(page_data, <span class="fu">aes</span>(<span class="at">y =</span> load_time)) <span class="sc">+</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Діаграма розмаху часу завантаження вебсторінки"</span>,</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Час завантаження, с"</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="lab_01a_r_quick_start_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Діаграма розмаху дає змогу оцінити медіану, нижній і верхній квартилі та загальне розсіювання часу завантаження.</p>
+</section>
+</section>
+<section id="контрольні-питання" class="level1">
+<h1>Контрольні питання</h1>
+<section id="що-таке-мова-r-і-чому-вона-зручна-для-статистичної-обробки-інформації" class="level2">
+<h2 class="anchored" data-anchor-id="що-таке-мова-r-і-чому-вона-зручна-для-статистичної-обробки-інформації">1. Що таке мова R і чому вона зручна для статистичної обробки інформації?</h2>
+<p>R – це спеціалізована мова програмування та програмне середовище для статистичних обчислень, аналізу даних і візуалізації. Вона зручна для статистичної обробки завдяки великій кількості вбудованих статистичних функцій та спеціалізованих пакетів.</p>
+</section>
+<section id="що-таке-обєкт-в-r" class="level2">
+<h2 class="anchored" data-anchor-id="що-таке-обєкт-в-r">2. Що таке об’єкт в R?</h2>
+<p>Об’єктом у R є елемент, який зберігає певні дані або результат операції. Наприклад, об’єктом може бути число, вектор, таблиця даних, статистична модель або результат обчислення.</p>
+</section>
+<section id="яке-призначення-має-оператор-присвоювання--" class="level2">
+<h2 class="anchored" data-anchor-id="яке-призначення-має-оператор-присвоювання--">3. Яке призначення має оператор присвоювання <code>&lt;-</code>?</h2>
+<p>Оператор <code>&lt;-</code> використовується для присвоювання значення об’єкту.</p>
+<p>Наприклад:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>number <span class="ot">&lt;-</span> <span class="dv">25</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>У цьому випадку значення <code>25</code> присвоюється об’єкту <code>number</code>.</p>
+</section>
+<section id="що-таке-вектор-і-чому-він-є-базовою-структурою-даних-у-статистичних-задачах" class="level2">
+<h2 class="anchored" data-anchor-id="що-таке-вектор-і-чому-він-є-базовою-структурою-даних-у-статистичних-задачах">4. Що таке вектор і чому він є базовою структурою даних у статистичних задачах?</h2>
+<p>Вектор – це впорядкована послідовність значень одного типу. Він є базовою структурою R, оскільки вибірку числових спостережень зручно представляти саме у вигляді вектора.</p>
+<p>Наприклад:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>values <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">1.2</span>, <span class="fl">1.5</span>, <span class="fl">1.8</span>, <span class="fl">2.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="чим-таблиця-даних-data.frame-відрізняється-від-простого-вектора" class="level2">
+<h2 class="anchored" data-anchor-id="чим-таблиця-даних-data.frame-відрізняється-від-простого-вектора">5. Чим таблиця даних <code>data.frame</code> відрізняється від простого вектора?</h2>
+<p>Вектор містить послідовність значень одного типу, тоді як <code>data.frame</code> складається з рядків і стовпців та може містити декілька змінних. Стовпці таблиці можуть мати різні типи даних.</p>
+</section>
+<section id="які-описові-статистики-характеризують-центр-вибірки" class="level2">
+<h2 class="anchored" data-anchor-id="які-описові-статистики-характеризують-центр-вибірки">6. Які описові статистики характеризують центр вибірки?</h2>
+<p>Основними характеристиками центра вибірки є <strong>середнє арифметичне та медіана</strong>.</p>
+<p>Середнє визначається як сума всіх значень, поділена на їх кількість. Медіана є центральним значенням упорядкованої вибірки.</p>
+</section>
+<section id="які-описові-статистики-характеризують-розсіювання-значень" class="level2">
+<h2 class="anchored" data-anchor-id="які-описові-статистики-характеризують-розсіювання-значень">7. Які описові статистики характеризують розсіювання значень?</h2>
+<p>Для характеристики розсіювання використовуються <strong>дисперсія та стандартне відхилення</strong>. Також для оцінювання розсіювання можна використовувати розмах та міжквартильний розмах.</p>
+</section>
+<section id="для-чого-використовується-гістограма" class="level2">
+<h2 class="anchored" data-anchor-id="для-чого-використовується-гістограма">8. Для чого використовується гістограма?</h2>
+<p>Гістограма використовується для графічного представлення розподілу числових даних. Вона показує кількість спостережень, що потрапляють до визначених інтервалів значень.</p>
+</section>
+<section id="що-показує-діаграма-розмаху" class="level2">
+<h2 class="anchored" data-anchor-id="що-показує-діаграма-розмаху">9. Що показує діаграма розмаху?</h2>
+<p>Діаграма розмаху показує медіану, квартилі та міжквартильний розмах вибірки. Також вона може використовуватися для виявлення значень, які істотно відрізняються від основної частини даних.</p>
+</section>
+<section id="яку-роль-відіграє-quarto-у-підготовці-відтворюваного-статистичного-звіту" class="level2">
+<h2 class="anchored" data-anchor-id="яку-роль-відіграє-quarto-у-підготовці-відтворюваного-статистичного-звіту">10. Яку роль відіграє Quarto у підготовці відтворюваного статистичного звіту?</h2>
+<p>Quarto дозволяє поєднувати текст, програмний код і результати його виконання в одному документі. Завдяки цьому статистичний звіт можна автоматично формувати з актуальними таблицями, графіками та результатами обчислень.</p>
+</section>
+</section>
+<section id="висновки" class="level1">
+<h1>Висновки</h1>
+<p>У ході лабораторної роботи було розглянуто базові можливості мови програмування R для статистичної обробки інформації.</p>
+<p>Було отримано практичні навички створення числових об’єктів і векторів, роботи з таблицями <code>data.frame</code>, використання статистичних функцій <code>mean()</code>, <code>median()</code>, <code>min()</code>, <code>max()</code>, <code>var()</code> та <code>sd()</code>.</p>
+<p>Для індивідуального завдання було сформовано вибірку з 30 значень часу завантаження вебсторінки. Для цієї вибірки обчислено основні описові статистики та побудовано гістограму, точковий графік і діаграму розмаху.</p>
+<p>Отримані результати показали, що більшість значень часу завантаження зосереджена в певному діапазоні, а описові статистики дають змогу кількісно оцінити центральне значення та розсіювання вибірки.</p>
+<p>Таким чином, у лабораторній роботі було сформовано початкові практичні навички використання R для первинного статистичного аналізу та візуалізації даних.</p>
+</section>
+<section id="рекомендовані-джерела" class="level1">
+<h1>Рекомендовані джерела</h1>
+<ol type="1">
+<li>R Core Team. <em>An Introduction to R</em>.</li>
+<li>Wickham, H., Çetinkaya-Rundel, M., Grolemund, G. <em>R for Data Science</em>.</li>
+<li>Quarto Documentation. <em>Guide: Computations with R</em>.</li>
+<li>Xie, Y., Allaire, J. J., Grolemund, G. <em>R Markdown: The Definitive Guide</em>.</li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
